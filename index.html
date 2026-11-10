@@ -7,106 +7,157 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy: #eaf4ff;
-    --paper: #172b4d;
---ink: #263b53;
---ink-dim: #60758c;
---rule: #cbdced;
---gold: #2563a6;
---gold-dim: #8ab4dc; 
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--navy);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    line-height:1.6;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    color:var(--paper);
-    margin:0 0 .4em;
-  }
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  a{color:var(--gold);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-    header {
+/* Compact Header */
+header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgba(190, 215, 240, 0.96);
-  backdrop-filter: blur(6px);
+  z-index: 100;
+  background: rgba(190, 215, 240, 0.97);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid #b0c9e0;
 }
-  
-  nav{
-    max-width:900px; margin:0 auto;
-    display:flex; gap:1.4rem; align-items:center;
-    padding:1rem 1.5rem;
-    flex-wrap:wrap;
+
+nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 7px 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #172b4d;
+}
+
+/* Three-dot button */
+.menu-container {
+  position: relative;
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  color: #172b4d;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 2px 10px;
+  border-radius: 5px;
+}
+
+.menu-button:hover {
+  background: #d5e6f6;
+}
+
+/* Dropdown menu */
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  min-width: 190px;
+  background: #ffffff;
+  border: 1px solid #d0deec;
+  border-radius: 7px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown a {
+  display: block;
+  padding: 10px 16px;
+  color: #263b53;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.dropdown a:hover {
+  background: #eaf4ff;
+  color: #164e83;
+}
+
+/* Mobile adjustment */
+@media(max-width:600px) {
+  nav {
+    padding: 6px 1rem;
   }
-  nav .brand{
-    font-family:'Fraunces', serif; font-weight:700; color:var(--paper);
-    margin-right:auto; letter-spacing:.02em;
-  }
-  nav a{
-    color:var(--ink-dim); font-size:.9rem; font-family:'IBM Plex Mono', monospace;
-    letter-spacing:.03em;
-  }
-  nav a:hover{color:var(--gold); text-decoration:none;}
-  main{max-width:900px; margin:0 auto; padding:0 1.5rem;}
-  section{padding:4rem 0; border-bottom:1px solid var(--rule);}
-  section:last-of-type{border-bottom:none;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:.8rem;
-    color:var(--gold); letter-spacing:.08em; text-transform:uppercase;
-    margin-bottom:.6rem; display:block;
-  }
-  .hero{padding-top:5rem;}
-  .hero h1{font-size:2.6rem; line-height:1.15;}
-  .hero p.role{color:var(--ink-dim); font-size:1.05rem; max-width:60ch;}
-  .tags{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.2rem;}
-  .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:.75rem;
-    border:1px solid var(--gold-dim); color:var(--gold);
-    padding:.25rem .6rem; border-radius:2px;
-  }
-  ul.plain{list-style:none; padding:0; margin:1rem 0 0;}
-  ul.plain li{
-    padcog:.7rem 0; border-bottom:1px solid var(--rule);
-    display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-  }
-  ul.plain li:last-child{border-bottom:none;}
-  .school{color:var(--paper); font-weight:500;}
-  .contact-list{list-style:none; padding:0; margin-top:1rem;}
-  .contact-list li{marg-bottom:.6rem; font-family:'IBM Plex Mono', monospace; font-size:.95rem;}
-  footer{
-    max-width:900px; margin:0 auto; padding:2rem 1.5rem 3rem;
-    color:var(--ink-dim); font-size:.85rem; font-family:'IBM Plex Mono', monospace;
-  }
-  @media(max-width:600px){
-    .hero h1{font-size:2rem;}
-  }
+}
 </style>
-</head>
-<body>
 
 <header>
   <nav>
-<nav>
-  <span class="brand">Mahmud Hasan Simanto</span>
-  <a href="#about me">About Me</a>
-  <a href="#education">Education</a>
-  <a href="#leadership">Leadership & Activities</a>
-  <a href="#skills">Skills</a>
-  <a href="#experiences">Experiences</a>
-  <a href="#interests">Interests</a>
-  <a href="#accomplishments">Accomplishments</a>
-  <a href="#contact">Contact</a>
+    <span class="brand">Mahmud Hasan Simanto</span>
+
+    <div class="menu-container">
+      <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        onclick="toggleMenu()">
+        ⋮
+      </button>
+
+      <div class="dropdown" id="dropdownMenu">
+        <a href="#about">About Me</a>
+        <a href="#education">Education</a>
+        <a href="#leadership">Leadership & Activities</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#interests">Interests</a>
+        <a href="#accomplishments">Accomplishments</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("dropdownMenu");
+  const button = document.getElementById("menuButton");
+
+  menu.classList.toggle("show");
+
+  button.setAttribute(
+    "aria-expanded",
+    menu.classList.contains("show")
+  );
+}
+
+// Close menu after selecting a section
+document.querySelectorAll(".dropdown a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("dropdownMenu").classList.remove("show");
+    document.getElementById("menuButton")
+      .setAttribute("aria-expanded", "false");
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", function(event) {
+  if (!event.target.closest(".menu-container")) {
+    document.getElementById("dropdownMenu").classList.remove("show");
+    document.getElementById("menuButton")
+      .setAttribute("aria-expanded", "false");
+  }
+});
+</script>
+
+
+
+
+
+  
 </nav>
   </nav>
 </header>
