@@ -3,20 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mahmud Hasan Simanto — Economics undergraduate at the University of Dhaka and Youth MP.">
 <title>Mahmud Hasan Simanto — Economics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
-/* Compact Header */
+:root {
+  --bg: #eef6fd;          /* very light blue page background */
+  --surface: #ffffff;
+  --header: rgba(190, 215, 240, 0.97);
+  --line: #b0c9e0;
+  --ink: #172b4d;
+  --ink-soft: #3d546f;
+  --accent: #164e83;
+  --hover: #d5e6f6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+
+body {
+  font-family: 'Fraunces', Georgia, serif;   /* same typeface as the header brand */
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+/* ---------- Header ---------- */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(190, 215, 240, 0.97);
+  background: var(--header);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #b0c9e0;
+  border-bottom: 1px solid var(--line);
 }
-
 nav {
   max-width: 1100px;
   margin: 0 auto;
@@ -25,232 +49,273 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
+nav .brand { font-size: 1rem; font-weight: 700; color: var(--ink); }
 
-nav .brand {
-  font-family: 'Fraunces', serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #172b4d;
-}
-
-/* Three-dot button */
-.menu-container {
-  position: relative;
-}
-
+.menu-container { position: relative; }
 .menu-button {
   background: transparent;
   border: none;
-  color: #172b4d;
+  color: var(--ink);
   font-size: 26px;
+  line-height: 1;
   cursor: pointer;
   padding: 2px 10px;
   border-radius: 5px;
 }
-
-.menu-button:hover {
-  background: #d5e6f6;
+.menu-button:hover { background: var(--hover); }
+.menu-button:focus-visible, .dropdown a:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
-
-/* Dropdown menu */
 .dropdown {
   display: none;
   position: absolute;
   right: 0;
   top: 100%;
   margin-top: 8px;
-  min-width: 190px;
-  background: #ffffff;
+  min-width: 210px;
+  background: var(--surface);
   border: 1px solid #d0deec;
   border-radius: 7px;
   box-shadow: 0 5px 18px rgba(0,0,0,0.12);
   overflow: hidden;
+  text-align: left;
 }
-
-.dropdown.show {
-  display: block;
-}
-
+.dropdown.show { display: block; }
 .dropdown a {
   display: block;
   padding: 10px 16px;
   color: #263b53;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: .9rem;
+  font-size: .92rem;
   text-decoration: none;
 }
+.dropdown a:hover { background: #eaf4ff; color: var(--accent); }
 
-.dropdown a:hover {
-  background: #eaf4ff;
-  color: #164e83;
+/* ---------- Layout ---------- */
+main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+
+section { padding: 2.2rem 0; border-bottom: 1px solid #d3e3f2; }
+section:last-of-type { border-bottom: none; }
+
+h1, h2 { font-weight: 700; color: var(--ink); line-height: 1.2; }
+h1 { font-size: clamp(2rem, 5vw, 2.8rem); }
+h2 { font-size: 1.45rem; margin-bottom: 1rem; }
+
+/* ---------- Hero ---------- */
+.hero { padding-top: 2.5rem; }
+.profile-photo {
+  display: block;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--surface);
+  box-shadow: 0 4px 16px rgba(23, 43, 77, 0.18);
+  background: var(--hover);
+}
+.role { margin-top: .4rem; color: var(--ink-soft); font-size: 1.1rem; font-weight: 600; }
+
+/* ---------- Gallery ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-top: 1.6rem;
+}
+.gallery figure {
+  background: var(--surface);
+  border: 1px solid #d0deec;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--hover);
+}
+.gallery figcaption { padding: 8px 10px; font-size: .88rem; color: var(--ink-soft); }
+
+/* ---------- Lists ---------- */
+ul { list-style: none; }
+ul.plain li { padding: .45rem 0; }
+.school { font-weight: 600; display: block; }
+.meta { display: block; font-size: .92rem; color: var(--ink-soft); }
+.tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.tag {
+  padding: 5px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: .95rem;
+}
+a { color: var(--accent); }
+.contact-list li { padding: .2rem 0; }
+
+footer {
+  padding: 1.6rem 1rem;
+  background: var(--header);
+  border-top: 1px solid var(--line);
+  font-size: .9rem;
+  color: var(--ink-soft);
 }
 
-/* Mobile adjustment */
-@media(max-width:600px) {
-  nav {
-    padding: 6px 1rem;
-  }
+@media (max-width: 600px) {
+  nav { padding: 6px 1rem; }
+  .profile-photo { width: 140px; height: 140px; }
 }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
+</head>
+<body>
 
 <header>
-  <nav>
+  <nav aria-label="Main navigation">
     <span class="brand">Mahmud Hasan Simanto</span>
-
     <div class="menu-container">
-      <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        onclick="toggleMenu()">
-        ⋮
-      </button>
-
+      <button class="menu-button" id="menuButton" aria-label="Open navigation menu" aria-expanded="false" aria-controls="dropdownMenu">⋮</button>
       <div class="dropdown" id="dropdownMenu">
         <a href="#about">About Me</a>
         <a href="#education">Education</a>
-        <a href="#leadership">Leadership & Activities</a>
+        <a href="#leadership">Leadership &amp; Activities</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#interests">Interests</a>
         <a href="#accomplishments">Accomplishments</a>
+        <a href="#press">Press Release</a>
+        <a href="#gallery">Photo Gallery</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 </header>
 
-<script>
-function toggleMenu() {
-  const menu = document.getElementById("dropdownMenu");
-  const button = document.getElementById("menuButton");
-
-  menu.classList.toggle("show");
-
-  button.setAttribute(
-    "aria-expanded",
-    menu.classList.contains("show")
-  );
-}
-
-// Close menu after selecting a section
-document.querySelectorAll(".dropdown a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.getElementById("dropdownMenu").classList.remove("show");
-    document.getElementById("menuButton")
-      .setAttribute("aria-expanded", "false");
-  });
-});
-
-// Close menu when clicking outside
-document.addEventListener("click", function(event) {
-  if (!event.target.closest(".menu-container")) {
-    document.getElementById("dropdownMenu").classList.remove("show");
-    document.getElementById("menuButton")
-      .setAttribute("aria-expanded", "false");
-  }
-});
-</script>
-
-
-
-
-
-  
-</nav>
-  </nav>
-</header>
-
 <main>
 
   <section class="hero">
-    
+    <!-- Replace images/profile.jpg with your own photo -->
+    <img class="profile-photo" src="images/profile.jpg" alt="Portrait of Mahmud Hasan Simanto">
     <h1>Mahmud Hasan Simanto</h1>
     <p class="role">Economics Undergraduate | Youth MP</p>
+
+    <!-- Photo gallery directly under the name. Replace the file names and captions with your own. -->
+    <div class="gallery" id="gallery" aria-label="Photo gallery">
+      <figure><img src="images/photo1.jpg" alt="Photo 1" loading="lazy"><figcaption>Caption 1</figcaption></figure>
+      <figure><img src="images/photo2.jpg" alt="Photo 2" loading="lazy"><figcaption>Caption 2</figcaption></figure>
+      <figure><img src="images/photo3.jpg" alt="Photo 3" loading="lazy"><figcaption>Caption 3</figcaption></figure>
+      <figure><img src="images/photo4.jpg" alt="Photo 4" loading="lazy"><figcaption>Caption 4</figcaption></figure>
+    </div>
   </section>
 
   <section id="about">
-    
     <h2>About Me</h2>
     <p>
-      I am currently completing Bachelor of Social Sciences (B.S.S) in Economics at the University of Dhaka.
+      I am completing a Bachelor of Social Sciences (B.S.S.) in Economics at the University of Dhaka.
+      My academic interests centre on development economics, with a particular focus on the economic
+      challenges facing Bangladesh.
     </p>
-    
   </section>
 
   <section id="education">
-   
     <h2>Education</h2>
     <ul class="plain">
       <li>
         <span class="school">B.S.S. in Economics — University of Dhaka</span>
-        <span class="mono">In Progress</span>
+        <span class="meta">In Progress</span>
       </li>
       <li>
         <span class="school">HSC — Notre Dame College, Dhaka</span>
-        <span class="mono">Completed</span>
+        <span class="meta">Completed</span>
       </li>
- <li>
+      <li>
         <span class="school">SSC — Pravakar Vidyaniketan</span>
-        <span class="mono">Completed</span>
+        <span class="meta">Completed</span>
       </li>
+    </ul>
+  </section>
 
- <section id="leadership">
-   
-    <h2>Leadership & Activities</h2>
+  <section id="leadership">
+    <h2>Leadership &amp; Activities</h2>
     <ul class="plain">
-    
- <section id="skills">
-   
+      <li><span class="school">Youth Member of Parliament</span><span class="meta">Add organisation, year and a one-line description</span></li>
+      <li><span class="school">Add role — Organisation</span><span class="meta">Year</span></li>
+    </ul>
+  </section>
+
+  <section id="skills">
     <h2>Skills</h2>
+    <div class="tags">
+      <span class="tag">Add skill</span>
+      <span class="tag">Add skill</span>
+      <span class="tag">Add skill</span>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
     <ul class="plain">
-      
- <section id="experience">
-   
-    <h2>Experiences</h2>
-    <ul class="plain">
-      
+      <li><span class="school">Add position — Organisation</span><span class="meta">Year · One-line description</span></li>
     </ul>
   </section>
 
   <section id="interests">
-    
-    <h2> Interests</h2>
+    <h2>Interests</h2>
     <div class="tags">
       <span class="tag">Poem Recitation</span>
       <span class="tag">Listening to Music</span>
       <span class="tag">Driving</span>
-    
     </div>
   </section>
 
   <section id="accomplishments">
-    
-    <h2>Accomplisments</h2>
+    <h2>Accomplishments</h2>
     <ul class="plain">
-      <li><span class="school">Department Scholarship - 2026</span></li>
-      <li><span class="school">Talentpool Scholarship (SSC) - 2023</span></li>
-      <li><span class="school">Upazila Best Student Award (SSC) - 2023</span></li>
-      <li><span class="school">Lifetime Membership at DCBK </span></li>
-      
+      <li><span class="school">Department Scholarship — 2026</span></li>
+      <li><span class="school">Talentpool Scholarship (SSC) — 2023</span></li>
+      <li><span class="school">Upazila Best Student Award (SSC) — 2023</span></li>
+      <li><span class="school">Lifetime Membership at DCBK</span></li>
+    </ul>
+  </section>
+
+  <section id="press">
+    <h2>Press Release</h2>
+    <ul class="plain">
+      <li>
+        <span class="school"><a href="#">Add headline of the press coverage</a></span>
+        <span class="meta">Publication · Date</span>
+      </li>
     </ul>
   </section>
 
   <section id="contact">
- 
     <h2>Contact</h2>
     <ul class="contact-list">
-      <li>Email: <a href="mailto:mahmud.h.simanto@gmail.com">youremail@example.com</a></li>
-     
+      <li>Email: <a href="mailto:mahmud.h.simanto@gmail.com">mahmud.h.simanto@gmail.com</a></li>
     </ul>
   </section>
 
 </main>
 
 <footer>
-  © Mahmud Hasan Simanto · Dhaka, Bangladesh 
+  © 2026 Mahmud Hasan Simanto · Dhaka, Bangladesh
 </footer>
+
+<script>
+const menu = document.getElementById("dropdownMenu");
+const button = document.getElementById("menuButton");
+
+function setMenu(open) {
+  menu.classList.toggle("show", open);
+  button.setAttribute("aria-expanded", String(open));
+}
+
+button.addEventListener("click", () => setMenu(!menu.classList.contains("show")));
+menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("click", e => { if (!e.target.closest(".menu-container")) setMenu(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+</script>
 
 </body>
 </html>
