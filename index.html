@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #eef6fd;          /* very light blue page background */
+  --bg: #eef6fd;
   --surface: #ffffff;
   --header: rgba(190, 215, 240, 0.97);
   --line: #b0c9e0;
@@ -24,12 +24,12 @@
 html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 
 body {
-  font-family: 'Fraunces', Georgia, serif;   /* same typeface as the header brand */
+  font-family: 'Fraunces', Georgia, serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.7;
   font-size: 1.02rem;
-  text-align: center;
+  text-align: left;               /* default: left-aligned */
 }
 
 /* ---------- Header ---------- */
@@ -99,10 +99,10 @@ section:last-of-type { border-bottom: none; }
 
 h1, h2 { font-weight: 700; color: var(--ink); line-height: 1.2; }
 h1 { font-size: clamp(2rem, 5vw, 2.8rem); }
-h2 { font-size: 1.45rem; margin-bottom: 1rem; }
+h2 { font-size: 1.45rem; margin-bottom: 1rem; text-align: left; }
 
-/* ---------- Hero ---------- */
-.hero { padding-top: 2.5rem; }
+/* ---------- Hero (stays centered) ---------- */
+.hero { padding-top: 2.5rem; text-align: center; }
 .profile-photo {
   display: block;
   width: 170px;
@@ -138,12 +138,35 @@ h2 { font-size: 1.45rem; margin-bottom: 1rem; }
 }
 .gallery figcaption { padding: 8px 10px; font-size: .88rem; color: var(--ink-soft); }
 
-/* ---------- Lists ---------- */
+/* ---------- Entries ---------- */
 ul { list-style: none; }
-ul.plain li { padding: .45rem 0; }
-.school { font-weight: 600; display: block; }
-.meta { display: block; font-size: .92rem; color: var(--ink-soft); }
-.tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+ul.plain > li { padding: .6rem 0; }
+
+/* title on the left, date on the right, same line */
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.school { font-weight: 600; text-align: left; }
+.date {
+  flex-shrink: 0;
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+  font-size: .92rem;
+  color: var(--ink-soft);
+}
+
+/* one point per line */
+ul.points { margin: .35rem 0 0 1.2rem; list-style: disc; }
+ul.points li { padding: .1rem 0; font-size: .95rem; color: var(--ink-soft); }
+ul.points li::marker { color: var(--accent); }
+
+/* ---------- Tags / pills ---------- */
+.tags { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; }
+.tags.compact { margin-top: .45rem; gap: 8px; }
 .tag {
   padding: 5px 16px;
   background: var(--surface);
@@ -151,6 +174,8 @@ ul.plain li { padding: .45rem 0; }
   border-radius: 999px;
   font-size: .95rem;
 }
+.tags.compact .tag { padding: 2px 13px; font-size: .88rem; }
+
 a { color: var(--accent); }
 .contact-list li { padding: .2rem 0; }
 
@@ -160,11 +185,13 @@ footer {
   border-top: 1px solid var(--line);
   font-size: .9rem;
   color: var(--ink-soft);
+  text-align: center;
 }
 
 @media (max-width: 600px) {
   nav { padding: 6px 1rem; }
   .profile-photo { width: 140px; height: 140px; }
+  .entry-head { flex-wrap: wrap; gap: .1rem 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -186,7 +213,6 @@ footer {
         <a href="#interests">Interests</a>
         <a href="#accomplishments">Accomplishments</a>
         <a href="#press">Press Release</a>
-        
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -196,50 +222,41 @@ footer {
 <main>
 
   <section class="hero">
-    <!-- Replace images/profile.jpg with your own photo -->
     <img class="profile-photo" src="profile.jpg" alt="Portrait of Mahmud Hasan Simanto">
     <h1>Mahmud Hasan Simanto</h1>
-    <p class="role">Economics Undergraduate | Youth MP | Philanthropist </p>
+    <p class="role">Economics Undergraduate | Youth MP | Philanthropist</p>
 
-    <!-- Photo gallery directly under the name. Replace the file names and captions with your own. -->
     <div class="gallery" id="gallery" aria-label="Photo gallery">
-
       <figure><img src="father .jpg" alt="NDND" loading="lazy"><figcaption>Receiving Certificate from Dr. Fr. Hemanto Pius Rozario, CSC, Principal, Notre Dame College, Dhaka</figcaption></figure>
       <figure><img src="poem .jpg" alt="NDND" loading="lazy"><figcaption>Reciting Kazi Nazrul Islam's "Bidrohi" Poem</figcaption></figure>
       <figure><img src="rotary.jpg" alt="Rotary" loading="lazy"><figcaption>Attending the Annual Rotaract Conference</figcaption></figure>
       <figure><img src="bymp .jpg" alt="BYMP Talk" loading="lazy"><figcaption>Talk on Bangladesh Youth Mock Parliament</figcaption></figure>
-      <figure><img src="rcndc .jpg" alt="RCNDC" loading="lazy"><figcaption>Receiving Award because of Succesfully Completing the "Earth Summit"</figcaption></figure>
-     
- <figure><img src="jacket .jpg" alt="NDHC" loading="lazy"><figcaption>Distributing Warm Colthings to some Needy People</figcaption></figure>
+      <figure><img src="rcndc .jpg" alt="RCNDC" loading="lazy"><figcaption>Receiving Award for Successfully Completing the "Earth Summit"</figcaption></figure>
+      <figure><img src="jacket .jpg" alt="NDHC" loading="lazy"><figcaption>Distributing Warm Clothes to Needy People</figcaption></figure>
       <figure><img src="ndhc .jpg" alt="NDHC" loading="lazy"><figcaption>Iftar Distribution Program Organized by Notre Dame Humanitarian Club</figcaption></figure>
       <figure><img src="flood .jpg" alt="RCNDC" loading="lazy"><figcaption>Collecting Funds for Flood-Affected People</figcaption></figure>
-
-      
-      
     </div>
   </section>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>
-      I am completing a Bachelor of Social Sciences (B.S.S.) in Economics at the University of Dhaka.
-    </p>
+    <p>I am completing a Bachelor of Social Sciences (B.S.S.) in Economics at the University of Dhaka.</p>
   </section>
 
   <section id="education">
     <h2>Education</h2>
     <ul class="plain">
       <li>
-        <span class="school">B.S.S. in Economics — University of Dhaka</span>
-        <span class="meta">In Progress</span>
+        <div class="entry-head"><span class="school">B.S.S. in Economics — University of Dhaka</span></div>
+        <div class="tags compact"><span class="tag">In Progress</span></div>
       </li>
       <li>
-        <span class="school">HSC — Notre Dame College, Dhaka</span>
-        <span class="meta">GPA 4.92, Arts, Completed in 2025</span>
+        <div class="entry-head"><span class="school">HSC — Notre Dame College, Dhaka</span></div>
+        <div class="tags compact"><span class="tag">GPA 4.92</span><span class="tag">Arts</span><span class="tag">Completed in 2025</span></div>
       </li>
       <li>
-        <span class="school">SSC — Pravakar Vidyaniketan, Tamai</span>
-        <span class="meta">GPA 5.00, Arts, Completed in 2023</span>
+        <div class="entry-head"><span class="school">SSC — Pravakar Vidyaniketan, Tamai</span></div>
+        <div class="tags compact"><span class="tag">GPA 5.00</span><span class="tag">Arts</span><span class="tag">Completed in 2023</span></div>
       </li>
     </ul>
   </section>
@@ -247,13 +264,36 @@ footer {
   <section id="leadership">
     <h2>Leadership &amp; Activities</h2>
     <ul class="plain">
-      <li><span class="school">General Secretary (Information & Technnology) | Notre Dame Humanitarian Club | April 2024 - April 2025</span><span class="meta"># Organized Iftar distribution program for over 70 ricksaw pullers and distributed around Notre Dame College area, # Fundraised for unprivileged people of the hills in winter season (BDT 20,000), # Co-ordinated some inter college quiz competitions (e.g., HEROES OF NDC) </span></li>
-      <li><span class="school">Community Service Director | Rotaract Club of Notre Dame College | April 2024 - April 2025</span><span class="meta"># Cleaned a park in Uttara, # Raised fund for flood affeccted people (BDT 7,000), # Assisted in "Earth Summit" by volunteer management, # Provided educational kits to orphan children (i.e., Book, Pen, Pencil, Eraser, Sharpner, File, Scale, and so on) </span></li>
-      <li><span class="school">Office Secretary | Notre Dame Natya Dal | April 2024 - April 2025</span><span class="meta"># Organized some workshops by prominent film actors and directors, # Co-ordinated at "10th National Natya Utshab", suprevising volunteers and welcomed program's distinguished guests </span></li>
-      <li><span class="school">Associate Member | United Nations Youth and Students Association of Bangladesh | 2025</span><span class="meta"> </span></li>
-      <li><span class="school">Member of Parliament | Bangladesh Youth Mock Parliament | Constituency: Sirajganj-3</span><span class="meta"> </span></li>
-      
-     
+      <li>
+        <div class="entry-head"><span class="school">General Secretary (Information &amp; Technology) | Notre Dame Humanitarian Club</span><span class="date">April 2024 – April 2025</span></div>
+        <ul class="points">
+          <li>Organized Iftar distribution program for over 70 rickshaw pullers and distributed around Notre Dame College area</li>
+          <li>Fundraised for underprivileged people of the hills in winter season (BDT 20,000)</li>
+          <li>Co-ordinated some inter-college quiz competitions (e.g., HEROES OF NDC)</li>
+        </ul>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Community Service Director | Rotaract Club of Notre Dame College</span><span class="date">April 2024 – April 2025</span></div>
+        <ul class="points">
+          <li>Cleaned a park in Uttara</li>
+          <li>Raised fund for flood-affected people (BDT 7,000)</li>
+          <li>Assisted in "Earth Summit" by volunteer management</li>
+          <li>Provided educational kits to orphan children (i.e., Book, Pen, Pencil, Eraser, Sharpener, File, Scale, and so on)</li>
+        </ul>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Office Secretary | Notre Dame Natya Dal</span><span class="date">April 2024 – April 2025</span></div>
+        <ul class="points">
+          <li>Organized some workshops by prominent film actors and directors</li>
+          <li>Co-ordinated at "10th National Natya Utshab", supervising volunteers and welcoming program's distinguished guests</li>
+        </ul>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Associate Member | United Nations Youth and Students Association of Bangladesh</span><span class="date">2025</span></div>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Member of Parliament | Bangladesh Youth Mock Parliament | Constituency: Sirajganj-3</span></div>
+      </li>
     </ul>
   </section>
 
@@ -262,19 +302,28 @@ footer {
     <div class="tags">
       <span class="tag">Language: Bangla (Native), English (Communication)</span>
       <span class="tag">Technical Skills: Designing in CANVA, MS Office</span>
-      <span class="tag">Non-Academic Skills: Electric Wiring </span>
+      <span class="tag">Non-Academic Skills: Electric Wiring</span>
     </div>
   </section>
 
   <section id="experience">
     <h2>Experience</h2>
     <ul class="plain">
-      <li><span class="school">Content Developer (Part-Time) — UDVASH Academic and Admission Care</span><span class="meta">April 2025 - Present · # Work for developing educational contents, chiefly general knowledge concentrated books for public university aspiring admission candidates</span></li>
-      <li><span class="school">Director — Hasan Acquarium Fish and Hatchery </span><span class="meta">2021 - 2023 · # Used to do almost all sorts of work such as 
-buying and selling fishes, negotiating with retailers and wholesalers, storing feed, changing water, 
-checking water parameters and so on   </span></li>
-<li><span class="school">Volunteer — Khwaja Mozammel Hoque (RA.) Foundation | February 12, 2017 - Present </span><span class="meta">    </span></li>
-      
+      <li>
+        <div class="entry-head"><span class="school">Content Developer (Part-Time) — UDVASH Academic and Admission Care</span><span class="date">April 2025 – Present</span></div>
+        <ul class="points">
+          <li>Develop educational content, chiefly general-knowledge books for public university admission candidates</li>
+        </ul>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Director — Hasan Acquarium Fish and Hatchery</span><span class="date">2021 – 2023</span></div>
+        <ul class="points">
+          <li>Handled almost all operations: buying and selling fish, negotiating with retailers and wholesalers, storing feed, changing water, checking water parameters and so on</li>
+        </ul>
+      </li>
+      <li>
+        <div class="entry-head"><span class="school">Volunteer — Khwaja Mozammel Hoque (RA.) Foundation</span><span class="date">February 12, 2017 – Present</span></div>
+      </li>
     </ul>
   </section>
 
@@ -290,13 +339,16 @@ checking water parameters and so on   </span></li>
   <section id="accomplishments">
     <h2>Accomplishments</h2>
     <ul class="plain">
-      <li><span class="school">Department Scholarship — 2026</span></li>
-      <li><span class="school">Perfect Attendance Certificate of Notre Dame College, Dhaka — 2025</span></li>
-      <li><span class="school">Talentpool Scholarship (SSC) — 2023</span></li>
-      <li><span class="school">Upazila Best Student Award (SSC) - 2023, with a Special Stipend</span><span class="meta"># Because I had been the one and only student in Arts department at my school for two years (2021 - 2023)</span></li>
-<li><span class="school">Ranked 42th in Rajshahi Board in SSC - 2023</span></li>
-<li><span class="school">Champions - Mystery Solve Segment at Youth Verse 2025 - Leadership Beyond Boundaries</span></li>
-      <li><span class="school">Lifetime Membership at Dipto Chetona Bikash Kendro (DCBK)</span></li>
+      <li><div class="entry-head"><span class="school">Department Scholarship</span><span class="date">2026</span></div></li>
+      <li><div class="entry-head"><span class="school">Perfect Attendance Certificate of Notre Dame College, Dhaka</span><span class="date">2025</span></div></li>
+      <li><div class="entry-head"><span class="school">Champions — Mystery Solve Segment at Youth Verse 2025: Leadership Beyond Boundaries</span><span class="date">2025</span></div></li>
+      <li><div class="entry-head"><span class="school">Talentpool Scholarship (SSC)</span><span class="date">2023</span></div></li>
+      <li>
+        <div class="entry-head"><span class="school">Upazila Best Student Award (SSC), with a Special Stipend</span><span class="date">2023</span></div>
+        <ul class="points"><li>Awarded for being the one and only student in the Arts department at my school for two years (2021 – 2023)</li></ul>
+      </li>
+      <li><div class="entry-head"><span class="school">Ranked 42nd in Rajshahi Board in SSC</span><span class="date">2023</span></div></li>
+      <li><div class="entry-head"><span class="school">Lifetime Membership at Dipto Chetona Bikash Kendro (DCBK)</span></div></li>
     </ul>
   </section>
 
@@ -304,8 +356,7 @@ checking water parameters and so on   </span></li>
     <h2>Press Release</h2>
     <ul class="plain">
       <li>
-        <span class="school"><a href="https://www.facebook.com/share/v/19sgkxm1fa/">Interview of Mine at KMRF 2026</a></span>
-        <span class="meta">KMRF · November 2, 2026</span>
+        <div class="entry-head"><span class="school"><a href="https://www.facebook.com/share/v/19sgkxm1fa/">Interview of Mine at KMRF 2026</a> — KMRF</span><span class="date">November 2, 2026</span></div>
       </li>
     </ul>
   </section>
