@@ -116,27 +116,71 @@ h2 { font-size: 1.45rem; margin-bottom: 1rem; text-align: left; }
 }
 .role { margin-top: .4rem; color: var(--ink-soft); font-size: 1.1rem; font-weight: 600; }
 
-/* ---------- Gallery ---------- */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 14px;
+/* ---------- Gallery carousel ---------- */
+.carousel {
+  --per: 3;
+  position: relative;
   margin-top: 1.6rem;
+  padding: 0 22px;
 }
-.gallery figure {
+.car-viewport { overflow: hidden; border-radius: 10px; }
+.car-track {
+  display: flex;
+  transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
+}
+.car-track figure {
+  flex: 0 0 calc(100% / var(--per));
+  padding: 0 7px;
+  display: flex;
+}
+
+.slide-card {
   background: var(--surface);
   border: 1px solid #d0deec;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
 }
-.gallery img {
+.car-track img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   background: var(--hover);
 }
-.gallery figcaption { padding: 8px 10px; font-size: .88rem; color: var(--ink-soft); }
+.car-track figcaption { padding: 8px 10px; font-size: .88rem; color: var(--ink-soft); }
+
+.car-btn {
+  position: absolute;
+  top: calc(50% - 22px);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 24px; line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(23,43,77,.15);
+  z-index: 2;
+}
+.car-btn:hover { background: var(--hover); }
+.car-btn.prev { left: -6px; }
+.car-btn.next { right: -6px; }
+.car-btn:focus-visible, .car-dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.car-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.car-dots button {
+  width: 9px; height: 9px;
+  padding: 0; border: none; border-radius: 50%;
+  background: var(--line);
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.car-dots button.active { background: var(--accent); transform: scale(1.3); }
+
+@media (max-width: 900px) { .carousel { --per: 2; } }
+@media (max-width: 600px) { .carousel { --per: 1; } }
 
 /* ---------- Entries ---------- */
 ul { list-style: none; }
@@ -166,7 +210,8 @@ ul.points li::marker { color: var(--accent); }
 
 /* ---------- Tags / pills ---------- */
 .tags { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; }
-.tags.compact { margin-top: .45rem; gap: 8px; }
+.tags.compact { gap: 8px; justify-content: flex-end; margin-left: auto; flex-shrink: 0; }
+.entry-head .tags.compact { align-self: center; }
 .tag {
   padding: 5px 16px;
   background: var(--surface);
@@ -192,6 +237,7 @@ footer {
   nav { padding: 6px 1rem; }
   .profile-photo { width: 140px; height: 140px; }
   .entry-head { flex-wrap: wrap; gap: .1rem 1rem; }
+  .entry-head .tags.compact { flex-shrink: 1; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -226,15 +272,22 @@ footer {
     <h1>Mahmud Hasan Simanto</h1>
     <p class="role">Economics Undergraduate | Youth MP | Philanthropist</p>
 
-    <div class="gallery" id="gallery" aria-label="Photo gallery">
-      <figure><img src="father .jpg" alt="NDND" loading="lazy"><figcaption>Receiving Certificate from Dr. Fr. Hemanto Pius Rozario, CSC, Principal, Notre Dame College, Dhaka</figcaption></figure>
-      <figure><img src="poem .jpg" alt="NDND" loading="lazy"><figcaption>Reciting Kazi Nazrul Islam's "Bidrohi" Poem</figcaption></figure>
-      <figure><img src="rotary.jpg" alt="Rotary" loading="lazy"><figcaption>Attending the Annual Rotaract Conference</figcaption></figure>
-      <figure><img src="bymp .jpg" alt="BYMP Talk" loading="lazy"><figcaption>Talk on Bangladesh Youth Mock Parliament</figcaption></figure>
-      <figure><img src="rcndc .jpg" alt="RCNDC" loading="lazy"><figcaption>Receiving Award for Successfully Completing the "Earth Summit"</figcaption></figure>
-      <figure><img src="jacket .jpg" alt="NDHC" loading="lazy"><figcaption>Distributing Warm Clothes to Needy People</figcaption></figure>
-      <figure><img src="ndhc .jpg" alt="NDHC" loading="lazy"><figcaption>Iftar Distribution Program Organized by Notre Dame Humanitarian Club</figcaption></figure>
-      <figure><img src="flood .jpg" alt="RCNDC" loading="lazy"><figcaption>Collecting Funds for Flood-Affected People</figcaption></figure>
+    <div class="carousel" id="gallery" aria-label="Photo gallery" aria-roledescription="carousel">
+      <button class="car-btn prev" aria-label="Previous photos">&#8249;</button>
+      <div class="car-viewport">
+        <div class="car-track">
+        <figure><div class="slide-card"><img src="father .jpg" alt="NDND" loading="lazy"><figcaption>Receiving Certificate from Dr. Fr. Hemanto Pius Rozario, CSC, Principal, Notre Dame College, Dhaka</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="poem .jpg" alt="NDND" loading="lazy"><figcaption>Reciting Kazi Nazrul Islam's "Bidrohi" Poem</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="rotary.jpg" alt="Rotary" loading="lazy"><figcaption>Attending the Annual Rotaract Conference</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="bymp .jpg" alt="BYMP Talk" loading="lazy"><figcaption>Talk on Bangladesh Youth Mock Parliament</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="rcndc .jpg" alt="RCNDC" loading="lazy"><figcaption>Receiving Award for Successfully Completing the "Earth Summit"</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="jacket .jpg" alt="NDHC" loading="lazy"><figcaption>Distributing Warm Clothes to Needy People</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="ndhc .jpg" alt="NDHC" loading="lazy"><figcaption>Iftar Distribution Program Organized by Notre Dame Humanitarian Club</figcaption></div></figure>
+        <figure><div class="slide-card"><img src="flood .jpg" alt="RCNDC" loading="lazy"><figcaption>Collecting Funds for Flood-Affected People</figcaption></div></figure>
+        </div>
+      </div>
+      <button class="car-btn next" aria-label="Next photos">&#8250;</button>
+      <div class="car-dots" role="tablist" aria-label="Choose photo"></div>
     </div>
   </section>
 
@@ -384,6 +437,74 @@ button.addEventListener("click", () => setMenu(!menu.classList.contains("show"))
 menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
 document.addEventListener("click", e => { if (!e.target.closest(".menu-container")) setMenu(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+/* ---------- Gallery carousel ---------- */
+(function () {
+  const root = document.getElementById("gallery");
+  const track = root.querySelector(".car-track");
+  const slides = track.children;
+  const dotsBox = root.querySelector(".car-dots");
+  const total = slides.length;
+  const INTERVAL = 3500;
+  let index = 0, timer = null, paused = false;
+
+  const per = () => parseInt(getComputedStyle(root).getPropertyValue("--per")) || 1;
+  const maxIndex = () => Math.max(0, total - per());
+
+  function buildDots() {
+    dotsBox.innerHTML = "";
+    for (let i = 0; i <= maxIndex(); i++) {
+      const b = document.createElement("button");
+      b.setAttribute("aria-label", "Go to photo " + (i + 1));
+      b.addEventListener("click", () => { go(i); restart(); });
+      dotsBox.appendChild(b);
+    }
+  }
+  function render() {
+    track.style.transform = "translateX(" + (-index * 100 / per()) + "%)";
+    [...dotsBox.children].forEach((d, i) => d.classList.toggle("active", i === index));
+  }
+  function go(i) {
+    const m = maxIndex();
+    index = i > m ? 0 : i < 0 ? m : i;
+    render();
+  }
+  function start() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    stop();
+    timer = setInterval(() => { if (!paused) go(index + 1); }, INTERVAL);
+  }
+  function stop() { clearInterval(timer); }
+  function restart() { start(); }
+
+  root.querySelector(".prev").addEventListener("click", () => { go(index - 1); restart(); });
+  root.querySelector(".next").addEventListener("click", () => { go(index + 1); restart(); });
+
+  root.addEventListener("mouseenter", () => paused = true);
+  root.addEventListener("mouseleave", () => paused = false);
+  root.addEventListener("focusin", () => paused = true);
+  root.addEventListener("focusout", () => paused = false);
+
+  // swipe support
+  let x0 = null;
+  root.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; paused = true; }, { passive: true });
+  root.addEventListener("touchend", e => {
+    if (x0 !== null) {
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { go(index + (dx < 0 ? 1 : -1)); restart(); }
+    }
+    x0 = null; paused = false;
+  });
+  document.addEventListener("visibilitychange", () => { paused = document.hidden; });
+
+  let lastPer = per();
+  window.addEventListener("resize", () => {
+    if (per() !== lastPer) { lastPer = per(); buildDots(); index = Math.min(index, maxIndex()); }
+    render();
+  });
+
+  buildDots(); render(); start();
+})();
 </script>
 
 </body>
